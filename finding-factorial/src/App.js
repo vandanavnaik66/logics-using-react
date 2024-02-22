@@ -1,10 +1,11 @@
-import { useState } from 'react';
+import { useState,useMemo, useRef, useEffect } from 'react';
 import './App.css';
 
 function App() {
 const[inputVal,setInputVal]=useState('');
 const[showFactorial,setShowFactorial]=useState(false);
-const[fact,showFact]=useState('')
+const[fact,showFact]=useState('');
+const refVal=useRef('')
 
 const findFactorial=()=>{
   let factorial=1;
@@ -13,6 +14,10 @@ const findFactorial=()=>{
   }
   return factorial;
 }
+
+// const factorialVal=useMemo(()=>findFactorial(),[inputVal])
+
+
 
 const handleForm=(e)=>{
 e.preventDefault();
@@ -24,8 +29,14 @@ if(!inputVal || regex.test(inputVal)){
   setShowFactorial(true);
   const factorial=findFactorial();
   console.log(factorial);
+  // showFact(factorialVal)
   showFact(factorial)
 }
+
+useEffect(()=>{
+  refVal.current.focus();
+},[])
+
 
 
   return (
@@ -33,6 +44,7 @@ if(!inputVal || regex.test(inputVal)){
       <form onSubmit={handleForm}>
       <input
       type='text'
+      ref={refVal}
        placeholder='Enter number'
        value={ inputVal}
        onChange={(e)=>{
