@@ -1,42 +1,41 @@
 import "./App.css";
-import { useState,useMemo } from "react";
+import { useState, useMemo } from "react";
 
 function App() {
   const [inputVal, setInputVal] = useState("");
   const [showReverse, setShowReverse] = useState("");
 
-
-   const reversedVal=useMemo(()=>{
+  const reversedVal = useMemo(() => {
     let reversed = "";
     for (let i = inputVal.length - 1; i >= 0; i--) {
       reversed = reversed + inputVal[i];
     }
     return reversed;
-   },[inputVal])
+  }, [inputVal]);
 
-   // use below code if the data is number, data comes from input is string
-//  [ let reversed=0;
-//        let rem;
-//        let input=inputVal;
-//        for(let i=(inputVal.length-1) ; i>=0 ; i--){
-//             rem=input%10;
-//             input=input/10;
-//           reversed = (reversed*10) + rem;
-//        }
-// ]
+  // use below code if the data is number, data comes from input is string
+  //   let reversed=0;
+  //        let rem;
+  //        let input=inputVal;
+  //        while(input>0){
+
+  //  rem=rem%10;
+  //  input=Math.floor(input/10);
+  //  reversed= reversed*10 + rem
+  
+  // }
 
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log(typeof inputVal);
-    setShowReverse('')
+    setShowReverse("");
     if (!inputVal || inputVal.length <= 1) {
       alert("enter value length more than 1");
       return;
     }
-   
+
     setShowReverse(reversedVal);
   };
-
 
   return (
     <div className="App">
@@ -46,7 +45,7 @@ function App() {
           placeholder="enter value to reverse"
           value={inputVal}
           onChange={(e) => {
-            setShowReverse('')
+            setShowReverse("");
             setInputVal(e.target.value);
           }}
         />
